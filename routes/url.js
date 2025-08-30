@@ -19,7 +19,7 @@ router.post("/shorten", async (req, res) => {
     }
 
     res.json({
-      shortUrl: `http://localhost:5000/${url.shortId}`,
+      shortUrl: `https://url-shortener-lzgh.onrender.com/${url.shortId}`,
       longUrl: url.longUrl,
       clicks: url.clicks,
     });
