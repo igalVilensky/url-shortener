@@ -19,7 +19,7 @@ router.post("/shorten", async (req, res) => {
     }
 
     res.json({
-      shortUrl: `https://url-shortener-lzgh.onrender.com/${url.shortId}`,
+      shortUrl: `https://clean-links/${url.shortId}`,
       longUrl: url.longUrl,
       clicks: url.clicks,
     });
