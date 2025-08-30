@@ -18,8 +18,10 @@ router.post("/shorten", async (req, res) => {
       await url.save();
     }
 
+    const RENDER_URL = "https://url-shortener-lzgh.onrender.com";
+
     res.json({
-      shortUrl: `https://url-shortener-lzgh.onrender.com/${url.shortId}`,
+      shortUrl: `${RENDER_URL}/${url.shortId}`,
       longUrl: url.longUrl,
       clicks: url.clicks,
     });

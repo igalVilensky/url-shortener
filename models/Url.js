@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { nanoid } = require("nanoid"); // works now with v3
+const { nanoid } = require("nanoid");
 
 const urlSchema = new mongoose.Schema({
   longUrl: {
@@ -9,7 +9,7 @@ const urlSchema = new mongoose.Schema({
   shortId: {
     type: String,
     required: true,
-    default: () => nanoid(7), // 7-character short ID
+    default: () => nanoid(5), // 5-character short ID
   },
   clicks: {
     type: Number,

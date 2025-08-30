@@ -13,7 +13,7 @@ const app = express();
 // 4. Middleware setup
 app.use(express.json()); // Parse incoming JSON requests
 app.use(morgan("dev")); // Log HTTP requests in console (GET /path 200 - 12ms)
-app.use(cors()); // Allow cross-origin requests (important if frontend connects later)
+app.use(cors()); // Allow cross-origin requests
 console.log("dotenv loaded:", process.env);
 console.log("MONGO_URI:", process.env.MONGO_URI);
 
