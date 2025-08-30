@@ -1,113 +1,93 @@
-🔗 URL Shortener Backend
-A robust RESTful API for the URL Shortener project, built with Node.js, Express, and MongoDB Atlas. Hosted on Render to handle URL shortening and analytics.
+# 🔗 URL Shortener Backend
 
-🚀 Features
+A robust **Node.js + Express** RESTful API for a simple URL shortener, using **MongoDB Atlas** for persistence and deployed on **Render**.
 
-🔗 Shorten URLs: Generate unique short codes for long URLs.
-➡️ Redirect: Seamlessly redirect short URLs to original destinations.
-📊 Analytics: Track click counts and stats for shortened URLs.
-🛡️ Scalable: Powered by MongoDB Atlas for reliable data storage.
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&style=flat-square)
+![Express](https://img.shields.io/badge/Express-000000?logo=express&style=flat-square)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&style=flat-square)
+![Render](https://img.shields.io/badge/Render-46E3B7?logo=render&style=flat-square)
 
-🛠️ Tech Stack
+## 🚀 Features
+- 🔗 **Shorten URLs**: Convert long URLs into unique, compact short codes.
+- ➡️ **Redirect**: Seamlessly redirect short URLs to their original destinations.
+- 📊 **Click Tracking**: Monitor the number of clicks per short link.
+- 🛠️ **API Endpoints**: Manage URLs and access stats via a RESTful API.
 
-Technology
-Description
+## 🛠️ Tech Stack
+| Technology | Description |
+|------------|-------------|
+| [Node.js](https://nodejs.org/) | JavaScript runtime for the backend |
+| [Express](https://expressjs.com/) | Web framework for building the API |
+| [MongoDB Atlas](https://www.mongodb.com/atlas) | Cloud-hosted MongoDB database |
+| [Mongoose](https://mongoosejs.com/) | MongoDB object modeling |
+| [Render](https://render.com/) | Cloud hosting platform |
 
-Node.js
-JavaScript runtime for the backend
+## ⚙️ Project Setup
 
-Express
-Web framework for building the API
+### Prerequisites
+- **Node.js**: v16 or higher
+- **npm**: Package manager
+- **Git**: Version control
+- **MongoDB Atlas**: Account with a database cluster
 
-MongoDB Atlas
-Cloud-hosted MongoDB database
+### Installation
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/igalVilensky/url-shortener.git
+   cd url-shortener
+   ```
 
-Mongoose
-MongoDB object modeling
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Render
-Cloud hosting platform
+3. **Configure environment variables**
+   Create a `.env` file in the root directory:
+   ```env
+   MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<dbname>?retryWrites=true&w=majority
+   PORT=5000
+   BASE_URL=https://url-shortener-lzgh.onrender.com
+   ```
+   - `MONGO_URI`: Your MongoDB Atlas connection string
+   - `PORT`: Local port for development (default: 5000)
+   - `BASE_URL`: Base URL of your deployed backend (e.g., Render URL)
 
-⚙️ Project Setup
-Prerequisites
+4. **Run locally**
+   ```bash
+   npm run dev
+   ```
+   The API will be available at `http://localhost:5000`.
 
-Node.js: v16 or higher
-npm: Package manager
-Git: Version control
-MongoDB Atlas: Account with a database cluster
+## 📡 API Endpoints
+| Method | Endpoint | Description | Request Body | Response |
+|--------|----------|-------------|--------------|----------|
+| POST   | `/shorten` | Create a short URL | `{ "longUrl": "https://example.com" }` | `{ "shortUrl": "https://url-shortener-lzgh.onrender.com/abc123", "longUrl": "https://example.com", "clicks": 0 }` |
+| GET    | `/:shortId` | Redirect to original URL and increment click count | - | Redirects to original URL |
+| GET    | `/stats` | Get stats for all URLs | - | `[{ "_id": "abc123", "longUrl": "https://example.com", "shortId": "abc123", "clicks": 5, "createdAt": "2025-08-30T12:00:00.000Z" }, ...]` |
 
-Installation
+## 🌍 Deployment (Render)
+1. Push your code to a GitHub repository.
+2. Go to [Render](https://render.com/) and create a new **Web Service**.
+3. Connect your GitHub repository.
+4. Configure the build settings:
+   - **Environment**: Node
+   - **Build command**: `npm install`
+   - **Start command**: `node server.js`
+5. Add environment variables in Render’s dashboard:
+   ```env
+   MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<dbname>?retryWrites=true&w=majority
+   PORT=5000
+   BASE_URL=https://url-shortener-lzgh.onrender.com
+   ```
+6. Deploy the service to get a live API URL! 🎉
 
-Clone the repository
-git clone https://github.com/igalVilensky/url-shortener-backend.git
-cd url-shortener-backend
+## 📸 Demo
+- **Backend API**: [Render Service](https://url-shortener-lzgh.onrender.com)
+- **Frontend App**: [Netlify Live Site](#) (Update with your frontend Netlify URL)
 
-Install dependencies
-npm install
+## 📝 License
+This project is licensed under the [MIT License](LICENSE).
 
-Configure environment variablesCreate a .env file in the root:
-MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<dbname>?retryWrites=true&w=majority
-PORT=3000
-BASE_URL=https://url-shortener-lzgh.onrender.com
-
-Replace placeholders with your MongoDB Atlas URI and Render URL.
-
-Run locally
-npm run dev
-
-API runs at http://localhost:3000.
-
-Build for production
-npm run build
-
-🌍 Deployment (Render)
-
-Push code to a GitHub repository.
-Create a new Web Service on Render.
-Connect your GitHub repository.
-Configure settings:
-Build command: npm install
-Start command: npm start
-
-Add environment variables in Render:
-MONGODB_URI: Your MongoDB Atlas connection string
-PORT: 3000
-BASE_URL: Your Render URL (e.g., https://url-shortener-lzgh.onrender.com)
-
-Deploy to get a live API URL! 🎉
-
-📋 API Endpoints
-
-Method
-Endpoint
-Description
-Request Body
-Response
-
-POST
-/api/shorten
-Create a short URL
-{ "originalUrl": "https://example.com" }
-{ "shortUrl": "https://url-shortener-lzgh.onrender.com/abc123" }
-
-GET
-/:shortCode
-Redirect to original URL
-
-- Redirects to original URL
-
-GET
-/api/stats
-Get URL stats
-
-- { "urls": [{ "originalUrl": "...", "shortCode": "...", "clicks": 0, "createdAt": "..." }, ...] }
-
-📸 Demo
-
-Backend API: Render Service
-Frontend App: Netlify Live Site (Update with your frontend URL)
-
-📝 License
-This project is licensed under the MIT License.
-🙌 Contributing
-Contributions are welcome! Please open an issue or submit a pull request on GitHub.
+## 🙌 Contributing
+Contributions are welcome! Please open an issue or submit a pull request on [GitHub](https://github.com/igalVilensky/url-shortener).
